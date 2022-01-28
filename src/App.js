@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Question from './components/Question'
+const questionList = require('./data/questionList')
+let score =0;
+let global_finalAnswer=[]
+export default function App(){
+  const [isQuizStarted,setIsQuizStarted] = React.useState(false)
+  const [isQuizFinishsed,setIsQuizFinished] =React.useState(false)
+  const [finalAnswer,setFinalAnswer] = React.useState(questionList)
 
-function App() {
+  function final_answer(obj){
+    const modified = finalAnswer.map((que)=>{
+      return que.id===obj.id?obj:que
+    })
+    console.log(modified)
+    setFinalAnswer(modified)
+     global_finalAnswer=modified
+  } 
+  
+  function finalScore(){
+    for(let i=0;i<global_finalAnswer.length;i++){
+      if(global_finalAnswer[i].marked===global_finalAnswer[i].correctOptionIndex){
+        score=score+1;
+      }
+    }
+  }
+
+  function startQuiz(){
+    setIsQuizStarted(true)
+  }
+  function finishQuiz(){
+    setIsQuizFinished(true)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      {
+        isQuizStarted?(isQuizFinishsed?<div>Your score is:{score}</div>
+          :<Question finishQuiz={finishQuiz}  final_answer={final_answer} finalScore={finalScore}/>)
+          :<div>
+            <div>Start the quiz now!!!!</div>
+            <button onClick={startQuiz}>Start</button>
+          </div>
+      }
     </div>
-  );
+  )
 }
-
-export default App;
