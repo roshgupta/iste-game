@@ -33,10 +33,13 @@ export default function Question({finishQuiz,final_answer,finalScore}){
         },5000)
     },[currentQuestion.id])
 */
+let style={
+    color:currentQuestion.options[currentQuestion.correctOptionIndex]
+}
     return (
         <div>
             <h3>Question:</h3>
-            <h4>{currentQuestion.title}</h4>
+            <h4 style={style}>{currentQuestion.title}</h4>
             {
                 currentQuestion.options.map((opt,ind)=>{
                       return (
