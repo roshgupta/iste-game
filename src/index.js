@@ -4,7 +4,7 @@ import App from './App';
 
 
 ReactDOM.render(
- <div className='mt-3'>
+ <div className='container'>
     <App />
   </div>,
   document.getElementById('root')

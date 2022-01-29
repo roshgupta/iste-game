@@ -15,24 +15,24 @@ export default function Question({finishQuiz,final_answer,finalScore}){
 
     function nextQuestion(id){
           if(id+1===questionList.length){
-               // clearTimeout(time_id)
+                clearInterval(time_id)
             final_answer(currentQuestion)
             finalScore()
             finishQuiz()
           }else{
-               // clearTimeout(time_id)
+               clearInterval(time_id)
             final_answer(currentQuestion)
             setCurrentQuestion(questionList[id+1])
         }    
     }
-/*
+
     React.useEffect(()=>{
-         time_id=setTimeout(()=>{
+         time_id=setInterval(()=>{
              console.log('oops late')
             nextQuestion(currentQuestion.id)
-        },5000)
+        },3000)
     },[currentQuestion.id])
-*/
+
 let style={
     color:currentQuestion.options[currentQuestion.correctOptionIndex]
 }
@@ -43,7 +43,7 @@ let style={
             {
                 currentQuestion.options.map((opt,ind)=>{
                       return (
-                          <div>
+                          <div className='mt-2 mb-2'>
                       <button className={ind==currentQuestion.marked?'active':'passive'} 
                       onClick={(event)=>{active(event,ind)}}>
                         --{opt} </button>
@@ -51,7 +51,7 @@ let style={
                 })
             }
             <div>
-                <button onClick={(event)=>{
+                <button className='btn btn-success btn-block' onClick={(event)=>{
                     nextQuestion(currentQuestion.id)}}>Next!</button>
             </div>
         </div>

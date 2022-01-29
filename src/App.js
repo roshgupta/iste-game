@@ -33,15 +33,15 @@ export default function App(){
     setIsQuizFinished(true)
   }
   return (
-    <div className='container'>
+    <div className='quiz-container'>
       {
         isQuizStarted?(isQuizFinishsed?<div>Your score is:{score}</div>
           :<Question finishQuiz={finishQuiz}  final_answer={final_answer} finalScore={finalScore}/>)
-          :<div>
+          :<div className='container m-auto'>
             <div>Start the quiz now!!!!</div>
-            <button onClick={startQuiz}>Start</button>
+            <button className='btn btn-primary' onClick={startQuiz}>Start</button>
           </div>
       }
     </div>
   )
-}
+ }
