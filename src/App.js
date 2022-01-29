@@ -8,7 +8,8 @@ export default function App(){
   const [isQuizFinishsed,setIsQuizFinished] =React.useState(false)
   const [finalAnswer,setFinalAnswer] = React.useState(questionList)
 
-  function final_answer(obj){
+  //this function modifies the finalAnswer vairable after every question is done.
+  function final_answer(obj){    
     const modified = finalAnswer.map((que)=>{
       return que.id===obj.id?obj:que
     })
