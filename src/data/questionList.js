@@ -1,4 +1,4 @@
-const questionList = [
+export const questionList = [
     {
       id:0,
       title: "GREEN",
@@ -77,7 +77,28 @@ const questionList = [
       ],
       marked:null,
       correctOptionIndex: 2
-    }
+    },
+    {
+      id:7,
+    title: "CHOCOLATE",
+    options: [
+      "Crimson",
+      "Chocolate",
+    ],
+    marked:null,
+    correctOptionIndex: 0
+  },
+  {
+    id:8,
+  title: "OLIVE",
+  options: [
+    "Olive",
+    "option which starts with O",
+    "Orange"
+  ],
+  marked:null,
+  correctOptionIndex: 2
+}
   ]
 
-  module.exports = questionList
+  

@@ -1,10 +1,13 @@
 import React from 'react'
-const questionList= require('../data/questionList')
+import {questionList} from '../data/questionList'
 let time_id=0
 export default function Question({finishQuiz,final_answer,finalScore}){
     const [currentQuestion,setCurrentQuestion]=React.useState(questionList[0])
-    console.log(currentQuestion)
-    function active(event,id){
+    //the currentQuestion question stores a particular question.
+
+    //this function gets called whenever we click on any option.
+    function active(id){
+        console.log('hii')
          setCurrentQuestion((prev)=>{
              return {
                     ...prev,
@@ -13,6 +16,7 @@ export default function Question({finishQuiz,final_answer,finalScore}){
          })
     }
 
+    //this function is called whenever next button is clicked or 5 seconds are up
     function nextQuestion(id){
           if(id+1===questionList.length){
                 clearInterval(time_id)
@@ -26,16 +30,23 @@ export default function Question({finishQuiz,final_answer,finalScore}){
         }    
     }
 
+    //used to set the timer whenever the question changes.
     React.useEffect(()=>{
          time_id=setInterval(()=>{
              console.log('oops late')
             nextQuestion(currentQuestion.id)
-        },3000)
+        },4000)
     },[currentQuestion.id])
 
+    //these are just used for styles
 let style={
     color:currentQuestion.options[currentQuestion.correctOptionIndex]
 }
+let active_style={
+    backgroundColor:'red',
+    color:'blue'
+}
+
     return (
         <div>
             <h3>Question:</h3>
@@ -44,8 +55,8 @@ let style={
                 currentQuestion.options.map((opt,ind)=>{
                       return (
                           <div className='mt-2 mb-2'>
-                      <button className={ind==currentQuestion.marked?'active':'passive'} 
-                      onClick={(event)=>{active(event,ind)}}>
+                      <button style={ind==currentQuestion.marked?active_style:{}} 
+                      onClick={()=>{active(ind)}}>
                         --{opt} </button>
                       </div>)
                 })
